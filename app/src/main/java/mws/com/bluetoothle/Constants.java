@@ -1,13 +1,6 @@
-package itan.com.bluetoothle;
-
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.os.ParcelUuid;
+package mws.com.bluetoothle;
 
 import java.util.UUID;
-
-/**
- * Created by itanbarpeled on 28/01/2018.
- */
 
 public class Constants {
 

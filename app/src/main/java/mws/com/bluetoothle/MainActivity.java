@@ -1,4 +1,4 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;

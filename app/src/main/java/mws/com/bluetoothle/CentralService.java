@@ -1,4 +1,4 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
@@ -17,12 +16,7 @@ import android.os.IBinder;
 import android.util.Log;
 import java.util.List;
 
-import static itan.com.bluetoothle.Constants.BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID;
-import static itan.com.bluetoothle.Constants.HEART_RATE_SERVICE_UUID;
-
-/**
- * Created by itanbarpeled on 28/01/2018.
- */
+import static mws.com.bluetoothle.Constants.BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID;
 
 public class CentralService extends Service {
 

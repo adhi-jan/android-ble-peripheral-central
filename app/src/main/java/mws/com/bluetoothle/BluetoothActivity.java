@@ -1,4 +1,4 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -11,16 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-/**
- * Created by itanbarpeled on 28/01/2018.
- */
-
 public abstract class BluetoothActivity extends AppCompatActivity {
 
-
     private Toolbar mToolbar;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -20,10 +20,10 @@ import android.widget.Switch;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static itan.com.bluetoothle.Constants.BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID;
-import static itan.com.bluetoothle.Constants.HEART_RATE_SERVICE_UUID;
-import static itan.com.bluetoothle.Constants.SERVER_MSG_FIRST_STATE;
-import static itan.com.bluetoothle.Constants.SERVER_MSG_SECOND_STATE;
+import static mws.com.bluetoothle.Constants.BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID;
+import static mws.com.bluetoothle.Constants.HEART_RATE_SERVICE_UUID;
+import static mws.com.bluetoothle.Constants.SERVER_MSG_FIRST_STATE;
+import static mws.com.bluetoothle.Constants.SERVER_MSG_SECOND_STATE;
 
 
 /**
@@ -177,6 +177,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
         done each time the user changes a value of a Characteristic
          */
         int value = checkedId == R.id.color_option_1 ? SERVER_MSG_FIRST_STATE : SERVER_MSG_SECOND_STATE;
+//        TODO: on button click changes
         mSampleCharacteristic.setValue(getValue(value));
     }
 
@@ -188,6 +189,8 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     send to the client the value of the Characteristic,
     as the user requested to notify.
      */
+
+//    TODO: Make changes here to send diff things
     private void notifyCharacteristicChanged() {
         /*
         done when the user clicks the notify button in the app.
@@ -279,6 +282,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
 
             Log.v(MainActivity.TAG, "Characteristic Write request: " + Arrays.toString(value));
 
+//            make changes to change value send
             mSampleCharacteristic.setValue(value);
 
             if (responseNeeded) {

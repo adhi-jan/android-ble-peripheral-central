@@ -1,4 +1,4 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -15,10 +15,6 @@ import android.os.ParcelUuid;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
-
-/**
- * Created by itanbarpeled on 28/01/2018.
- */
 
 public class PeripheralAdvertiseService extends Service {
 

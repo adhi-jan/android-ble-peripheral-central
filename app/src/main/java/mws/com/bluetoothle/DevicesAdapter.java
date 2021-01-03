@@ -1,6 +1,5 @@
-package itan.com.bluetoothle;
+package mws.com.bluetoothle;
 
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.ScanResult;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,10 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by itanbarpeled on 28/01/2018.
- */
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHolder>  {
 
