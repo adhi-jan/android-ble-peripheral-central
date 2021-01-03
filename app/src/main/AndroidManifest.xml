@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="itan.com.bluetoothle">
+    package="mws.com.bluetoothle">
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -20,29 +20,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="mws.com.bluetoothle.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".PeripheralRoleActivity" />
+        <activity android:name="mws.com.bluetoothle.PeripheralRoleActivity" />
 
-        <activity android:name=".CentralRoleActivity" />
+        <activity android:name="mws.com.bluetoothle.CentralRoleActivity" />
 
-        <activity android:name=".DeviceConnectActivity" />
+        <activity android:name="mws.com.bluetoothle.DeviceConnectActivity" />
 
-        <!--
-        Service to handle BLE Advertising - Using a service allows advertising to continue
-        when the app is no longer on screen in a reliable manner.
-        -->
         <service
-            android:name=".PeripheralAdvertiseService"
+            android:name="mws.com.bluetoothle.PeripheralAdvertiseService"
             android:enabled="true"
             android:exported="false"/>
 
-        <service android:name=".CentralService"
+        <service android:name="mws.com.bluetoothle.CentralService"
             android:enabled="true"
             android:exported="false"/>
 

@@ -19,12 +19,9 @@ public abstract class BluetoothActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        mToolbar = findViewById(R.id.toolbar);
         setToolbar();
     }
-
 
     protected abstract int getLayoutId();
 
@@ -46,18 +43,12 @@ public abstract class BluetoothActivity extends AppCompatActivity {
     }
 
     protected BluetoothAdapter getBluetoothAdapter() {
-
         BluetoothAdapter bluetoothAdapter;
         BluetoothManager bluetoothService = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE));
 
         if (bluetoothService != null) {
-
             bluetoothAdapter = bluetoothService.getAdapter();
-
-            // Is Bluetooth supported on this device?
             if (bluetoothAdapter != null) {
-
-                // Is Bluetooth turned on?
                 if (bluetoothAdapter.isEnabled()) {
                     /*
                     all the other Bluetooth initial checks already verified in MainActivity
@@ -66,10 +57,8 @@ public abstract class BluetoothActivity extends AppCompatActivity {
                 }
             }
         }
-
         return null;
     }
-
 
     private void setToolbar() {
         setSupportActionBar(mToolbar);
@@ -90,6 +79,4 @@ public abstract class BluetoothActivity extends AppCompatActivity {
         mToolbar.setTitle(getTitleString());
         mToolbar.setTitleTextColor(Color.WHITE);
     }
-
 }
-

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "itan.com.bluetoothle"
+        applicationId "mws.com.bluetoothle"
         /*
          In Android 5.0, an Android device can now act as a Bluetooth LE peripheral device.
          Android 4.3 introduced platform support for Bluetooth Low Energy (Bluetooth LE)

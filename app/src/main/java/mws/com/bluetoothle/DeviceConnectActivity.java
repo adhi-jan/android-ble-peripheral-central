@@ -28,9 +28,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-    private static final String LIST_NAME = "NAME";
-    private static final String LIST_UUID = "UUID";
-
 
     private CentralService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mDeviceServices;
@@ -58,11 +55,10 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
         }
 
-
-        mConnectionStatus = (TextView) findViewById(R.id.connection_status);
-        mConnectedDeviceName = (TextView) findViewById(R.id.connected_device_name);
-        mServerCharacteristic = (ImageView) findViewById(R.id.server_characteristic_value);
-        mRequestReadCharacteristic = (Button) findViewById(R.id.request_read_characteristic);
+        mConnectionStatus = findViewById(R.id.connection_status);
+        mConnectedDeviceName = findViewById(R.id.connected_device_name);
+        mServerCharacteristic = findViewById(R.id.server_characteristic_value);
+        mRequestReadCharacteristic = findViewById(R.id.request_read_characteristic);
         mRequestReadCharacteristic.setOnClickListener(this);
 
 
@@ -72,15 +68,8 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             mConnectedDeviceName.setText(mDeviceName);
         }
 
-
         Intent gattServiceIntent = new Intent(this, CentralService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-
-        /*
-        updateConnectionState(R.string.connected);
-        mRequestReadCharacteristic.setEnabled(true);
-        updateInputFromServer(SERVER_MSG_SECOND_STATE);
-        */
     }
 
 
@@ -118,21 +107,13 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
-
             case R.id.request_read_characteristic:
                 requestReadCharacteristic();
                 break;
-
         }
     }
 
-
-    /*
-    request from the Server the value of the Characteristic.
-    this request is asynchronous.
-     */
     private void requestReadCharacteristic() {
         if (mBluetoothLeService != null && mCharacteristic != null) {
             mBluetoothLeService.readCharacteristic(mCharacteristic);
@@ -140,7 +121,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             showMsgText(R.string.error_unknown);
         }
     }
-
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -164,7 +144,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             mBluetoothLeService = null;
         }
     };
-
 
     /*
      Handles various events fired by the Service.
@@ -207,17 +186,10 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
                     Log.v(MainActivity.TAG, "ACTION_DATA_AVAILABLE " + msg);
                     updateInputFromServer(msg);
                     break;
-
             }
         }
     };
 
-
-    /*
-     This sample demonstrates 'Read' and 'Notify' features.
-     See http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
-     list of supported characteristic features.
-    */
     private void registerCharacteristic() {
 
         BluetoothGattCharacteristic characteristic = null;
@@ -257,10 +229,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
         }
     }
 
-
-    /*
-    Demonstrates how to iterate through the supported GATT Services/Characteristics.
-    */
     private void setGattServices(List<BluetoothGattService> gattServices) {
 
         if (gattServices == null) {
@@ -272,12 +240,10 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
         // Loops through available GATT Services from the connected device
         for (BluetoothGattService gattService : gattServices) {
             ArrayList<BluetoothGattCharacteristic> characteristic = new ArrayList<>();
-            characteristic.addAll(gattService.getCharacteristics()); // each GATT Service can have multiple characteristic
+            characteristic.addAll(gattService.getCharacteristics());
             mDeviceServices.add(characteristic);
         }
-
     }
-
 
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
@@ -288,7 +254,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
         });
     }
 
-
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(CentralService.ACTION_GATT_CONNECTED);
@@ -298,9 +263,8 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
         return intentFilter;
     }
 
-//TODO: this is where msg get added to the view
+//    NOTE: This is where the colour is being updated in client
     private void updateInputFromServer(int msg) {
-
         String color;
 
         switch (msg) {
@@ -315,16 +279,9 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             default:
                 color = "#FFFFFF";
                 break;
-
         }
 
         mServerCharacteristic.setBackgroundColor(Color.parseColor(color));
         showMsgText(String.format(getString(R.string.characteristic_value_received), msg));
     }
-
-
-
-
-
-
 }

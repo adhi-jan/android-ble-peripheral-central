@@ -22,20 +22,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 2;
 
-
     private Button mPeripheralButton;
     private Button mCentralButton;
 
     private BluetoothAdapter mBluetoothAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPeripheralButton = (Button) findViewById(R.id.button_role_peripheral);
-        mCentralButton = (Button) findViewById(R.id.button_role_central);
+        mPeripheralButton = findViewById(R.id.button_role_peripheral);
+        mCentralButton = findViewById(R.id.button_role_central);
 
         mPeripheralButton.setOnClickListener(this);
         mCentralButton.setOnClickListener(this);
@@ -43,9 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (savedInstanceState == null) {
             initBT();
         }
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -54,18 +50,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (requestCode) {
             case REQUEST_ENABLE_BT:
-
                 if (resultCode == RESULT_OK) {
-
                     initBT();
-
                 } else {
-
                     // User declined to enable Bluetooth, exit the app.
                     Toast.makeText(this, R.string.bt_not_enabled, Toast.LENGTH_SHORT).show();
                 }
                 break;
-
             default:
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
@@ -90,24 +81,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     private void initBT() {
-
         BluetoothManager bluetoothService = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE));
-
         if (bluetoothService != null) {
-
             mBluetoothAdapter = bluetoothService.getAdapter();
-
             // Is Bluetooth supported on this device?
             if (mBluetoothAdapter != null) {
-
                 // Is Bluetooth turned on?
                 if (mBluetoothAdapter.isEnabled()) {
-
                     // Are Bluetooth Advertisements supported on this device?
                     if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
-
                         // see https://stackoverflow.com/a/37015725/1869297
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -122,28 +105,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Everything is supported and enabled.
                             enableNavigation();
                         }
-
-
                     } else {
-
                         // Bluetooth Advertisements are not supported.
                         showErrorText(R.string.bt_ads_not_supported);
                     }
                 } else {
-
                     // Prompt user to turn on Bluetooth (logic continues in onActivityResult()).
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 }
             } else {
-
                 // Bluetooth is not supported.
                 showErrorText(R.string.bt_not_supported);
             }
-
         }
     }
-
 
     @Override
     public void onClick(View view) {

@@ -48,16 +48,13 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     private Switch mEnableAdvertisementSwitch;
     private RadioGroup mCharacteristicValueSwitch;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mNotifyButton = (Button) findViewById(R.id.button_notify);
-        mEnableAdvertisementSwitch = (Switch) findViewById(R.id.advertise_switch);
-        mCharacteristicValueSwitch = (RadioGroup) findViewById(R.id.color_switch);
-
+        mNotifyButton = findViewById(R.id.button_notify);
+        mEnableAdvertisementSwitch = findViewById(R.id.advertise_switch);
+        mCharacteristicValueSwitch = findViewById(R.id.color_switch);
 
         mNotifyButton.setOnClickListener(this);
         mEnableAdvertisementSwitch.setOnClickListener(this);
@@ -158,7 +155,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
         }
     }
 
-
+// NOTE: make changes to change intial data send from peripheral
     private void setCharacteristic() {
         setCharacteristic(R.id.color_option_1);
     }
@@ -177,7 +174,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
         done each time the user changes a value of a Characteristic
          */
         int value = checkedId == R.id.color_option_1 ? SERVER_MSG_FIRST_STATE : SERVER_MSG_SECOND_STATE;
-//        TODO: on button click changes
+//        Note: on button click changes to value being send on clicking Notify button
         mSampleCharacteristic.setValue(getValue(value));
     }
 
@@ -190,7 +187,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     as the user requested to notify.
      */
 
-//    TODO: Make changes here to send diff things
+//    NOTE: Make changes here to send diff things
     private void notifyCharacteristicChanged() {
         /*
         done when the user clicks the notify button in the app.
@@ -225,9 +222,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
             if (status == BluetoothGatt.GATT_SUCCESS) {
 
                 if (newState == BluetoothGatt.STATE_CONNECTED) {
-
                     mBluetoothDevices.add(device);
-
                     msg = "Connected to device: " + device.getAddress();
                     Log.v(MainActivity.TAG, msg);
                     showMsgText(msg);
