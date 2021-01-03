@@ -22,8 +22,6 @@ import java.util.HashSet;
 
 import static mws.com.bluetoothle.Constants.BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID;
 import static mws.com.bluetoothle.Constants.HEART_RATE_SERVICE_UUID;
-import static mws.com.bluetoothle.Constants.SERVER_MSG_FIRST_STATE;
-import static mws.com.bluetoothle.Constants.SERVER_MSG_SECOND_STATE;
 
 
 /**
@@ -61,7 +59,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
         mCharacteristicValueSwitch.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                setCharacteristic(checkedId);
+                setCharacteristic();
             }
         });
 
@@ -156,9 +154,9 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     }
 
 // NOTE: make changes to change intial data send from peripheral
-    private void setCharacteristic() {
-        setCharacteristic(R.id.color_option_1);
-    }
+//    private void setCharacteristic() {
+//        setCharacteristic(R.id.color_option_1);
+//    }
 
     /*
     update the value of Characteristic.
@@ -169,17 +167,15 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     value - can be between 0-255 according to:
     https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.body_sensor_location.xml
      */
-    private void setCharacteristic(int checkedId) {
+    private void setCharacteristic() {
         /*
         done each time the user changes a value of a Characteristic
          */
-        int value = checkedId == R.id.color_option_1 ? SERVER_MSG_FIRST_STATE : SERVER_MSG_SECOND_STATE;
+//        int value = checkedId == R.id.color_option_1 ? SERVER_MSG_FIRST_STATE : SERVER_MSG_SECOND_STATE;
 //        Note: on button click changes to value being send on clicking Notify button
-        mSampleCharacteristic.setValue(getValue(value));
-    }
-
-    private byte[] getValue(int value) {
-        return new byte[]{(byte) value};
+        double randomDouble = Math.random();
+        String value = "Value" + randomDouble;
+        mSampleCharacteristic.setValue(value.getBytes());
     }
 
     /*

@@ -1,5 +1,6 @@
 package mws.com.bluetoothle;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -38,7 +39,7 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
 
     private TextView mConnectionStatus;
     private TextView mConnectedDeviceName;
-    private ImageView mServerCharacteristic;
+    private TextView mServerCharacteristic;
     private Button mRequestReadCharacteristic;
 
 
@@ -182,7 +183,7 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
                     break;
 
                 case CentralService.ACTION_DATA_AVAILABLE:
-                    int msg = intent.getIntExtra(CentralService.EXTRA_DATA, -1);
+                    String msg = intent.getStringExtra(CentralService.EXTRA_DATA);
                     Log.v(MainActivity.TAG, "ACTION_DATA_AVAILABLE " + msg);
                     updateInputFromServer(msg);
                     break;
@@ -264,24 +265,9 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
     }
 
 //    NOTE: This is where the colour is being updated in client
-    private void updateInputFromServer(int msg) {
-        String color;
-
-        switch (msg) {
-            case SERVER_MSG_FIRST_STATE:
-                color = "#AD1457";
-                break;
-
-            case SERVER_MSG_SECOND_STATE:
-                color = "#6A1B9A";
-                break;
-
-            default:
-                color = "#FFFFFF";
-                break;
-        }
-
-        mServerCharacteristic.setBackgroundColor(Color.parseColor(color));
+    @SuppressLint("StringFormatMatches")
+    private void updateInputFromServer(String msg) {
+        mServerCharacteristic.setText(msg);
         showMsgText(String.format(getString(R.string.characteristic_value_received), msg));
     }
 }
